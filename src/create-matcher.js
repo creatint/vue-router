@@ -32,7 +32,10 @@ export function createMatcher (
     return { pathList, pathMap, nameMap }
   }
   function removeRoutes (routes) {
-    const { pathListToDel, pathMapToDel, nameMapToDel } = createRouteMap(routes)
+    const ref = createRouteMap(routes)
+    const pathListToDel = ref.pathList
+    const pathMapToDel = ref.pathMap
+    const nameMapToDel = ref.nameMap
     if (pathListToDel.length > 0) {
       for (let i = 0, l = pathListToDel.length; i < l; i++) {
         const index = pathList.indexOf(pathListToDel[i])

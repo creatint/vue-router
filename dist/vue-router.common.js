@@ -1,5 +1,5 @@
 /*!
-  * vue-router v0.0.3
+  * vue-router v0.0.4
   * (c) 2020 Evan You
   * @license MIT
   */
@@ -1487,9 +1487,9 @@ function createMatcher (
   }
   function removeRoutes (routes) {
     var ref = createRouteMap(routes);
-    var pathListToDel = ref.pathListToDel;
-    var pathMapToDel = ref.pathMapToDel;
-    var nameMapToDel = ref.nameMapToDel;
+    var pathListToDel = ref.pathList;
+    var pathMapToDel = ref.pathMap;
+    var nameMapToDel = ref.nameMap;
     if (pathListToDel.length > 0) {
       for (var i = 0, l = pathListToDel.length; i < l; i++) {
         var index = pathList.indexOf(pathListToDel[i]);
@@ -3030,7 +3030,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '0.0.3';
+VueRouter.version = '0.0.4';
 
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);
