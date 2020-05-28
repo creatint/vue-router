@@ -11,6 +11,11 @@ import { normalizeLocation } from './util/location'
 export type Matcher = {
   match: (raw: RawLocation, current?: Route, redirectedFrom?: Location) => Route;
   addRoutes: (routes: Array<RouteConfig>) => void;
+  getRoutes: () => {
+    pathList: Array<string>,
+    pathMap: Dictionary<RouteRecord>,
+    nameMap: Dictionary<RouteRecord>
+  };
 };
 
 export function createMatcher (
@@ -21,6 +26,9 @@ export function createMatcher (
 
   function addRoutes (routes) {
     createRouteMap(routes, pathList, pathMap, nameMap)
+  }
+  function getRoutes () {
+    return { pathList, pathMap, nameMap }
   }
 
   function match (
@@ -166,7 +174,8 @@ export function createMatcher (
 
   return {
     match,
-    addRoutes
+    addRoutes,
+    getRoutes
   }
 }
 
