@@ -1,5 +1,5 @@
 /*!
-  * vue-router v0.0.1
+  * vue-router v0.0.3
   * (c) 2020 Evan You
   * @license MIT
   */
@@ -1461,6 +1461,26 @@ function createMatcher (
   function addRoutes (routes) {
     createRouteMap(routes, pathList, pathMap, nameMap);
   }
+  function getRoutes () {
+    return { pathList, pathMap, nameMap }
+  }
+  function removeRoutes (routes) {
+    const { pathListToDel, pathMapToDel, nameMapToDel } = createRouteMap(routes);
+    if (pathListToDel.length > 0) {
+      for (let i = 0, l = pathListToDel.length; i < l; i++) {
+        const index = pathList.indexOf(pathListToDel[i]);
+        if (index >= 0) {
+          pathList.slice(index, 1);
+        }
+      }
+    }
+    for (const path in pathMapToDel) {
+      delete pathMap[path];
+    }
+    for (const name in nameMapToDel) {
+      delete nameMap[name];
+    }
+  }
 
   function match (
     raw,
@@ -1605,7 +1625,9 @@ function createMatcher (
 
   return {
     match,
-    addRoutes
+    addRoutes,
+    getRoutes,
+    removeRoutes
   }
 }
 
@@ -2942,6 +2964,12 @@ class VueRouter {
       this.history.transitionTo(this.history.getCurrentLocation());
     }
   }
+  getRoutes () {
+    return this.matcher.getRoutes()
+  }
+  removeRoutes (routes) {
+    return this.matcher.removeRoutes(routes)
+  }
 }
 
 function registerHook (list, fn) {
@@ -2958,7 +2986,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '0.0.1';
+VueRouter.version = '0.0.3';
 
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);

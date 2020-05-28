@@ -16,6 +16,7 @@ export type Matcher = {
     pathMap: Dictionary<RouteRecord>,
     nameMap: Dictionary<RouteRecord>
   };
+  removeRoutes: (route: Array<RouteConfig>) => void;
 };
 
 export function createMatcher (
@@ -29,6 +30,23 @@ export function createMatcher (
   }
   function getRoutes () {
     return { pathList, pathMap, nameMap }
+  }
+  function removeRoutes (routes) {
+    const { pathListToDel, pathMapToDel, nameMapToDel } = createRouteMap(routes)
+    if (pathListToDel.length > 0) {
+      for (let i = 0, l = pathListToDel.length; i < l; i++) {
+        const index = pathList.indexOf(pathListToDel[i])
+        if (index >= 0) {
+          pathList.slice(index, 1)
+        }
+      }
+    }
+    for (const path in pathMapToDel) {
+      delete pathMap[path]
+    }
+    for (const name in nameMapToDel) {
+      delete nameMap[name]
+    }
   }
 
   function match (
@@ -175,7 +193,8 @@ export function createMatcher (
   return {
     match,
     addRoutes,
-    getRoutes
+    getRoutes,
+    removeRoutes
   }
 }
 

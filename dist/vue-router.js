@@ -1,5 +1,5 @@
 /*!
-  * vue-router v0.0.1
+  * vue-router v0.0.3
   * (c) 2020 Evan You
   * @license MIT
   */
@@ -1486,6 +1486,29 @@
     function addRoutes (routes) {
       createRouteMap(routes, pathList, pathMap, nameMap);
     }
+    function getRoutes () {
+      return { pathList: pathList, pathMap: pathMap, nameMap: nameMap }
+    }
+    function removeRoutes (routes) {
+      var ref = createRouteMap(routes);
+      var pathListToDel = ref.pathListToDel;
+      var pathMapToDel = ref.pathMapToDel;
+      var nameMapToDel = ref.nameMapToDel;
+      if (pathListToDel.length > 0) {
+        for (var i = 0, l = pathListToDel.length; i < l; i++) {
+          var index = pathList.indexOf(pathListToDel[i]);
+          if (index >= 0) {
+            pathList.slice(index, 1);
+          }
+        }
+      }
+      for (var path in pathMapToDel) {
+        delete pathMap[path];
+      }
+      for (var name in nameMapToDel) {
+        delete nameMap[name];
+      }
+    }
 
     function match (
       raw,
@@ -1633,7 +1656,9 @@
 
     return {
       match: match,
-      addRoutes: addRoutes
+      addRoutes: addRoutes,
+      getRoutes: getRoutes,
+      removeRoutes: removeRoutes
     }
   }
 
@@ -2986,6 +3011,12 @@
       this.history.transitionTo(this.history.getCurrentLocation());
     }
   };
+  VueRouter.prototype.getRoutes = function getRoutes () {
+    return this.matcher.getRoutes()
+  };
+  VueRouter.prototype.removeRoutes = function removeRoutes (routes) {
+    return this.matcher.removeRoutes(routes)
+  };
 
   Object.defineProperties( VueRouter.prototype, prototypeAccessors );
 
@@ -3003,7 +3034,7 @@
   }
 
   VueRouter.install = install;
-  VueRouter.version = '0.0.1';
+  VueRouter.version = '0.0.3';
 
   if (inBrowser && window.Vue) {
     window.Vue.use(VueRouter);
