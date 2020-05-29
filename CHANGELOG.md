@@ -1,3 +1,18 @@
+## [3.3.3](https://github.com/creatint/vue-router/compare/v3.3.1...v3.3.3) (2020-05-29)
+
+### DEBUG pathListToDel
+
+
+
+## [3.3.1](https://github.com/creatint/vue-router/compare/v3.3.0...v3.3.1) (2020-05-27)
+
+
+### Bug Fixes
+
+* **errors:** avoid unnecessary log of errors ([2c77247](https://github.com/creatint/vue-router/commit/2c77247))
+
+
+
 # [3.3.0](https://github.com/vuejs/vue-router/compare/v3.2.0...v3.3.0) (2020-05-27)
 
 

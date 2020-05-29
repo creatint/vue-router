@@ -36,14 +36,18 @@ export function createMatcher (
     const pathListToDel = ref.pathList
     const pathMapToDel = ref.pathMap
     const nameMapToDel = ref.nameMap
+    console.log(pathListToDel)
+    console.log(pathList)
     if (pathListToDel.length > 0) {
       for (let i = 0, l = pathListToDel.length; i < l; i++) {
         const index = pathList.indexOf(pathListToDel[i])
+        console.log('index=', index)
         if (index >= 0) {
           pathList.slice(index, 1)
         }
       }
     }
+    console.log(pathList)
     for (const path in pathMapToDel) {
       delete pathMap[path]
     }
