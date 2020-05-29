@@ -1,3 +1,10 @@
+## [3.3.4](https://github.com/creatint/vue-router/compare/v3.3.1...v3.3.4) (2020-05-29)
+### Bug Fixes
+* **errors:** splice方法写成了slice
+
+
+
+
 ## [3.3.3](https://github.com/creatint/vue-router/compare/v3.3.1...v3.3.3) (2020-05-29)
 
 ### DEBUG pathListToDel

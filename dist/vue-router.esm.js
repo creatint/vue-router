@@ -1488,18 +1488,14 @@ function createMatcher (
     var pathListToDel = ref.pathList;
     var pathMapToDel = ref.pathMap;
     var nameMapToDel = ref.nameMap;
-    console.log(pathListToDel);
-    console.log(pathList);
     if (pathListToDel.length > 0) {
       for (var i = 0, l = pathListToDel.length; i < l; i++) {
         var index = pathList.indexOf(pathListToDel[i]);
-        console.log('index=', index);
         if (index >= 0) {
-          pathList.slice(index, 1);
+          pathList.splice(index, 1);
         }
       }
     }
-    console.log(pathList);
     for (var path in pathMapToDel) {
       delete pathMap[path];
     }
